@@ -1178,7 +1178,7 @@ class DataClassGenerator {
                 // List<E>
                 if (p.isCollection) {
                     const defaultValue = withDefaultValues ? ' ?? <int>[]' : '';
-                    method += `${p.type}.from((${leftOfValue}${value}${defaultValue}${rightOfValue} as List<int>).map<${p.listType.rawType}>((x) => ${p.listType.rawType}.values[x]),)`
+                    method += `${p.type}.from((${leftOfValue}${value}${defaultValue}${rightOfValue} as List).map<${p.listType.rawType}>((x) => ${p.listType.rawType}.values[x]),)`
                 } else {
                     const defaultValue = withDefaultValues ? ' ?? 0' : '';
                     method += `${p.rawType}.values[${leftOfValue}${value}${defaultValue}${rightOfValue} as int]`;
@@ -1196,7 +1196,7 @@ class DataClassGenerator {
                 if (p.isPrimitive) {
                     method += `(${value}${defaultValue} as ${p.type})`;
                 } else {
-                    method += `(${value} as List<int>).map<${p.listType.rawType}>((x) => ${customTypeMapping(p, 'x')},),${defaultValue})`;
+                    method += `(${value} as List).map<${p.listType.rawType}>((x) => ${customTypeMapping(p, 'x')},),${defaultValue})`;
                 }
                 /// (map['name'] ?? '') as String
             } else {
